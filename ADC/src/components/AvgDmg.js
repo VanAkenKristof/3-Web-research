@@ -8,16 +8,28 @@ class AvgDmg extends React.Component {
         armorClass: {},
         damageModifier: {},
         dice: {
-            3: 2,
-            20: 6,
+            4: 0,
+            6: 0,
+            8: 0,
+            10: 0,
+            12: 0,
         },
+        avgDmg: {},
+    };
+
+    addDie = sides => {
+        const dice = { ...this.state.dice };
+        dice[sides]++;
+        this.setState({ dice });
+
+        this.state.dice[sides]++;
     };
 
     render() { return (
 
         <div className="row" style={{marginTop: 300}}>
-            <div className="offset-lg-5 col-lg-2">
-                <AvgDmgForm />
+            <div className="offset-lg-4 col-lg-4">
+                <AvgDmgForm addDie={this.addDie} addedDice={this.state.dice}/>
 
             </div>
         </div>
