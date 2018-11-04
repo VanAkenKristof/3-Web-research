@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Die from './Die';
 
 class AvgDmgForm extends React.Component {
-    render() { return (
 
+    render() { return (
 
         <div className="row">
             <div className="col-sm-12">
@@ -25,34 +25,37 @@ class AvgDmgForm extends React.Component {
                     </div>
                 </div>
 
-                <form onSubmit={this.createFish}>
+                <form onSubmit={this.props.calculateAvgDmg}>
 
                     <div className="row">
                         <div className="col-sm-12">
-                            <input name="name" type="text" placeholder={"Name"} />
+                            <input name="name" type="text" placeholder={"Name"} onChange={(event) => this.props.changeState("name", event.target.value)} />
                         </div>
                     </div>
 
                     <div className="row">
                         <div className="col-sm-6">
-                            <input name="attackModifier" type={"text"} placeholder={"Attack mod"} />
+                            <input name="attackModifier" type={"text"} placeholder={"Attack mod"} onChange={(event) => this.props.changeState("attackModifier", parseInt(event.target.value))} />
                         </div>
                         <div className="col-sm-6">
-                            <input name="damageModifier" type={"text"} placeholder={"Damage mod"} />
+                            <input name="damageModifier" type={"text"} placeholder={"Damage mod"} onChange={(event) => this.props.changeState("damageModifier", parseInt(event.target.value))} />
                         </div>
                     </div>
 
                     <div className="row">
                         <div className="col-sm-6">
-                            <input name="attackRolls" type="text" placeholder={"# attack rolls"} />
+                            <input name="attackRolls" type="text" placeholder={"# attack rolls"} onChange={(event) => this.props.changeState("attackRolls", parseInt(event.target.value))} />
                         </div>
                         <div className="col-sm-6">
-                            <input name="armorClass" type={"text"} placeholder={"Armor Class"} />
+                            <input name="armorClass" type={"text"} placeholder={"Armor Class"} onChange={(event) => this.props.changeState("armorClass", parseInt(event.target.value))} />
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-sm-12">
-                            <button type={"submit"} className={'btn btn-primary'}>Calculate Average Damage</button>
+                        <div className="col-sm-4">
+                            <button className={'btn btn-danger btn-block'}>Reset dice</button>
+                        </div>
+                        <div className="col-sm-8">
+                            <button type={"submit"} className={'btn btn-success'}>Calculate Average Damage</button>
                         </div>
                     </div>
                 </form>

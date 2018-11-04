@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import AvgDmgForm from './AvgDmgForm';
+import calculateAvarageDamage from '../calculator';
 
 class AvgDmg extends React.Component {
     state = {
-        attackRolls: {},
-        attackModifier: {},
-        armorClass: {},
-        damageModifier: {},
         dice: {
             4: 0,
             6: 0,
@@ -14,23 +11,35 @@ class AvgDmg extends React.Component {
             10: 0,
             12: 0,
         },
-        avgDmg: {},
     };
 
     addDie = sides => {
         const dice = { ...this.state.dice };
         dice[sides]++;
         this.setState({ dice });
+    };
 
-        this.state.dice[sides]++;
+    changeState = (key, value) => {
+      this.setState({ [key] : value });
+    };
+
+    calculateAvgDmg = (event) => {
+        event.preventDefault();
+
+        this.setState({ avgDmg : calculateAvarageDamage(this.state)});
     };
 
     render() { return (
 
-        <div className="row" style={{marginTop: 300}}>
-            <div className="offset-lg-4 col-lg-4">
-                <AvgDmgForm addDie={this.addDie} addedDice={this.state.dice}/>
+        <div className="row">
+            <div className="col-lg-12">
+                <p style={{textAlign: "center", fontSize: 50, fontWeight: "strong"}}>
+                    {this.state.avgDmg || ""}
+                </p>
 
+            </div>
+            <div className="col-lg-12">
+                <AvgDmgForm addDie={this.addDie} addedDice={this.state.dice} changeState={this.changeState} calculateAvgDmg={this.calculateAvgDmg}/>
             </div>
         </div>
 
