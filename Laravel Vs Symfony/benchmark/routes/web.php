@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/benchmark/eloquent', 'BenchmarkController@eloquent');
+Route::get('/benchmark/eloquent2', 'BenchmarkController@eloquent2');
+Route::get('/benchmark/doctrine', 'BenchmarkController@doctrine');
+
+Route::get('/benchmark/eloquent/read', 'BenchmarkController@eloquentRead');
+Route::get('/benchmark/doctrine/read', 'BenchmarkController@doctrineRead');
